@@ -1,7 +1,8 @@
 # Личный проект «Кекстаграм» [![Build status][travis-image]][travis-url]
 
 * Студент: [Юрий Радунцев](https://up.htmlacademy.ru/javascript/19/user/822945).
-* Наставник: `Неизвестно`.
+* Наставник: [Александр Пинаев](
+https://htmlacademy.ru/profile/id1075973).
 
 ---
 
