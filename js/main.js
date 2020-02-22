@@ -11,15 +11,20 @@ var names = ['Илья', 'Юра', 'Настя', 'Катя', 'Илон', 'Сти
 
 var descriptions = ['Все клево, отдыхаю', 'Попиваю сок у себя на квартале', 'Отдыхаю после рабочего дня', 'Сегодня пятница!', 'Ставьте лайки!1!'];
 
+var randomInteger = function (min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+};
+
 var createOneRandomElement = function (mass) { //  ФУНКЦИЯ ДЛЯ ОПРЕДЕЛЕНИЯ ОДНОГО РАНДОМНОГО ЭЛЕМЕНТА МАССИВА
-  return mass[randomInteger(0, mass.length)]
+  return mass[randomInteger(0, mass.length)];
 };
 
 var createTwoRandomElement = function (mass) { // ФУНКЦИЯ ДЛЯ ОПРЕДЕЛЕНИЯ ДВУХ РАНДОМНЫХ ЭЛЕМЕНТОВ МАССИВА
   var firstElement = mass[randomInteger(0, mass.length)];
   var secondElement = mass[randomInteger(0, mass.length)];
-  if (firstElement === secondElement)
+  if (firstElement === secondElement) {
     secondElement += 1;
+  }
   return firstElement + ' ' + secondElement;
 };
 
@@ -35,9 +40,10 @@ var addPhotos = function () {
       comments: {
         avatar: 'img/avatar-' + randomInteger(1, 6) + '.svg',
         message: randomNumberForMess === 0 ? createOneRandomElement(messages) : createTwoRandomElement(messages),
-      	name: createOneRandomElement(names)
+        name: createOneRandomElement(names)
       }
     };
     photos.push(photosDescription); // ДОБАВЛЕНИЕ КАЖДОГО СГЕНЕРИРОВАННОГО ОБЪЕКТА В МАССИВ PHOTOS
   }
 };
+addPhotos();
