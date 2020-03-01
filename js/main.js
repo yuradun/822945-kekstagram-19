@@ -47,3 +47,22 @@ var addPhotos = function () {
   }
 };
 addPhotos();
+
+var renderPhotos = function (photos) {
+  var pictureTemplate = document.querySelector('#picture').content.querySelector('a');
+  var pictureElement = document.createDocumentFragment();
+  for (var i = 1; i < 26; i++) {
+    var pictureItem = pictureTemplate.cloneNode(true);
+    pictureItem.templateClone.querySelector('.picture__img').src = photos[i - 1].url;
+    pictureItem.querySelector('.picture__info').textContent = photos[i - 1].description;
+    pictureItem.querySelector('.picture__comments').textContent = photos[i - 1].comments;
+    pictureItem.querySelector('.picture__likes').textContent = photos[i - 1].likes;
+    pictureElement.appendChild(pictureItem);
+  }
+  pictureTemplate.appendChild(pictureElement); // !!ТАК НЕ РАБОТАЕТ!!
+
+  /* var container = document.querySelector('.container'); И ТАК ТОЖЕ
+  container.appendChild(pictureElement);
+  */
+};
+renderPhotos();
