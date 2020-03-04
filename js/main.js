@@ -31,12 +31,12 @@ var createOneRandomElement = function (mass) { //  ФУНКЦИЯ ДЛЯ ОПР�
 var addPhotos = function () {
   for (var i = 1; i < 26; i++) {
     var randomNumberForMassMess = randomInteger(0, 1); // ГЕНЕРИРУЕМ СЛУЧАЙНОЕ ЧИСЛО ДЛЯ message(randomNumberForMess)
-    var massMess = [];
+    var photoMessages = [];
     if (randomNumberForMassMess === 0) {
-      massMess[0] = createOneRandomElement(messages);
+      photoMessages[0] = createOneRandomElement(messages);
     } else {
-      massMess[0] = createOneRandomElement(messages);
-      massMess[1] = createOneRandomElement(messages);
+      photoMessages[0] = createOneRandomElement(messages);
+      photoMessages[1] = createOneRandomElement(messages);
     }
     var photosDescription = {
       url: 'photos/' + i + '.jpg',
@@ -44,7 +44,7 @@ var addPhotos = function () {
       likes: randomInteger(15, 200),
       comments: {
         avatar: 'img/avatar-' + randomInteger(1, 6) + '.svg',
-        message: massMess,
+        message: photoMessages,
         name: createOneRandomElement(names)
       }
     };
@@ -57,7 +57,7 @@ var renderPhotos = function (mass) {
   var pictureTemplate = document.querySelector('#picture').content.querySelector('a'); // находим шаблон для фотографий из html
   var pictureElement = document.createDocumentFragment(); // создаем фрагмент, который и будет вырисовывать нам заполненный шаблон
   for (var i = 0; i < mass.length; i++) {
-    pictureTemplate.templateClone.querySelector('.picture__img').src = mass[i].url;
+    pictureTemplate.querySelector('.picture__img').src = mass[i].url;
     pictureTemplate.querySelector('.picture__comments').textContent = mass[i].comments.length;
     pictureTemplate.querySelector('.picture__likes').textContent = mass[i].likes;
     pictureElement.appendChild(pictureTemplate);
