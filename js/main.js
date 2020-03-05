@@ -57,3 +57,17 @@ var renderPhotos = function (mass) {
 
 };
 renderPhotos(images);
+
+// module4
+
+var buttonUploadImage = document.querySelector('#upload-file');
+var photoSettingsWindow = document.querySelector('.img-upload__overlay');
+var photoSettingsWindowClose = photoSettingsWindow.querySelector('.img-upload__cancel');
+
+buttonUploadImage.addEventListenner('click', function () {
+  photoSettingsWindow.classList.remove('hidden');
+});
+
+photoSettingsWindowClose.addEventListenner('click', function () {
+  photoSettingsWindow.classList.add('hidden');
+});
