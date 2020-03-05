@@ -55,16 +55,16 @@ addPhotos();
 
 var renderPhotos = function (mass) {
   var pictureTemplate = document.querySelector('#picture').content.querySelector('a'); // находим шаблон для фотографий из html
-  var pictureElement = document.createDocumentFragment(); // создаем фрагмент, который и будет вырисовывать нам заполненный шаблон
+  var pictureFragment = document.createDocumentFragment(); // создаем фрагмент, который и будет вырисовывать нам заполненный шаблон
   for (var i = 0; i < mass.length; i++) {
     pictureTemplate.querySelector('.picture__img').src = mass[i].url;
     pictureTemplate.querySelector('.picture__comments').textContent = mass[i].comments.length;
     pictureTemplate.querySelector('.picture__likes').textContent = mass[i].likes;
-    pictureElement.appendChild(pictureTemplate);
+    pictureFragment.appendChild(pictureTemplate);
   }
   // pictureTemplate.appendChild(pictureElement); // !!ТАК НЕ РАБОТАЕТ!!
-  var container = document.querySelectorAll('.picture.container');
-  container.appendChild(pictureTemplate);
+  var container = document.querySelector('.pictures.container');
+  container.appendChild(pictureFragment);
 
 };
 renderPhotos(images);
