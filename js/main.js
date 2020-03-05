@@ -8,29 +8,18 @@ var messages = ['В целом всё неплохо. Но не всё.',
   'Я поскользнулся на банановой кожуре и уронил фотоаппарат на кота и у меня получилась фотография лучше.'];
 var names = ['Илья', 'Юра', 'Настя', 'Катя', 'Илон', 'Стив'];
 var descriptions = ['Все клево, отдыхаю', 'Попиваю сок у себя на квартале', 'Отдыхаю после рабочего дня', 'Сегодня пятница!', 'Ставьте лайки!1!'];
-var images = []; // МАССИВ ДЛЯ ОБЪЕКТОВ
+var images = [];
 
 var randomInteger = function (min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-var createOneRandomElement = function (mass) { //  ФУНКЦИЯ ДЛЯ ОПРЕДЕЛЕНИЯ ОДНОГО РАНДОМНОГО ЭЛЕМЕНТА МАССИВА
+var createOneRandomElement = function (mass) {
   return mass[randomInteger(0, mass.length)];
 };
-
-/* var createTwoRandomElement = function (mass) { // ФУНКЦИЯ ДЛЯ ОПРЕДЕЛЕНИЯ ДВУХ РАНДОМНЫХ ЭЛЕМЕНТОВ МАССИВА
-  var firstElement = mass[randomInteger(0, mass.length)];
-  var secondElement = mass[randomInteger(0, mass.length)];
-  if (firstElement === secondElement) {
-    secondElement += 1;
-  }
-  return firstElement + ' ' + secondElement;
-};
-*/
-
 var addPhotos = function () {
   for (var i = 1; i < 26; i++) {
-    var randomNumberForMassMess = randomInteger(0, 1); // ГЕНЕРИРУЕМ СЛУЧАЙНОЕ ЧИСЛО ДЛЯ message(randomNumberForMess)
+    var randomNumberForMassMess = randomInteger(0, 1);
     var photoMessages = [];
     if (randomNumberForMassMess === 0) {
       photoMessages[0] = createOneRandomElement(messages);
@@ -48,14 +37,14 @@ var addPhotos = function () {
         name: createOneRandomElement(names)
       }
     };
-    images.push(photosDescription); // ДОБАВЛЕНИЕ КАЖДОГО СГЕНЕРИРОВАННОГО ОБЪЕКТА В МАССИВ imageMass
+    images.push(photosDescription);
   }
 };
 addPhotos();
 
 var renderPhotos = function (mass) {
-  var pictureTemplate = document.querySelector('#picture').content.querySelector('a'); // находим шаблон для фотографий из html
-  var pictureFragment = document.createDocumentFragment(); // создаем фрагмент, который и будет вырисовывать нам заполненный шаблон
+  var pictureTemplate = document.querySelector('#picture').content.querySelector('a');
+  var pictureFragment = document.createDocumentFragment();
   for (var i = 0; i < mass.length; i++) {
     var clone = pictureTemplate.cloneNode(true);
     clone.querySelector('.picture__img').src = mass[i].url;
@@ -63,7 +52,6 @@ var renderPhotos = function (mass) {
     clone.querySelector('.picture__likes').textContent = mass[i].likes;
     pictureFragment.appendChild(clone);
   }
-  // pictureTemplate.appendChild(pictureElement); // !!ТАК НЕ РАБОТАЕТ!!
   var container = document.querySelector('.pictures.container');
   container.appendChild(pictureFragment);
 
