@@ -57,10 +57,11 @@ var renderPhotos = function (mass) {
   var pictureTemplate = document.querySelector('#picture').content.querySelector('a'); // находим шаблон для фотографий из html
   var pictureFragment = document.createDocumentFragment(); // создаем фрагмент, который и будет вырисовывать нам заполненный шаблон
   for (var i = 0; i < mass.length; i++) {
-    pictureTemplate.querySelector('.picture__img').src = mass[i].url;
-    pictureTemplate.querySelector('.picture__comments').textContent = mass[i].comments.length;
-    pictureTemplate.querySelector('.picture__likes').textContent = mass[i].likes;
-    pictureFragment.appendChild(pictureTemplate);
+    var clone = pictureTemplate.cloneNode(true);
+    clone.querySelector('.picture__img').src = mass[i].url;
+    clone.querySelector('.picture__comments').textContent = mass[i].comments.length;
+    clone.querySelector('.picture__likes').textContent = mass[i].likes;
+    pictureFragment.appendChild(clone);
   }
   // pictureTemplate.appendChild(pictureElement); // !!ТАК НЕ РАБОТАЕТ!!
   var container = document.querySelector('.pictures.container');
