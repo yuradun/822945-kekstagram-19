@@ -64,10 +64,31 @@ var buttonUploadImage = document.querySelector('#upload-file');
 var photoSettingsWindow = document.querySelector('.img-upload__overlay');
 var photoSettingsWindowClose = photoSettingsWindow.querySelector('.img-upload__cancel');
 
-buttonUploadImage.addEventListenner('click', function () {
+buttonUploadImage.addEventListener('change', function () {
   photoSettingsWindow.classList.remove('hidden');
 });
 
-photoSettingsWindowClose.addEventListenner('click', function () {
+photoSettingsWindowClose.addEventListener('click', function () {
   photoSettingsWindow.classList.add('hidden');
 });
+
+// Таким вариантом не закрывает окно почему-то
+/*
+var uploadChangeHandler = function () {
+  photoSettingsWindow.classList.remove('hidden');
+};
+
+buttonUploadImage.addEventListener('change', uploadChangeHandler);
+
+photoSettingsWindowClose.removeEventListener('click', uploadChangeHandler);
+*/
+
+var sliderForEffect = photoSettingsWindow.querySelector('.effect-level__pin');
+var sliderEffectTabindex = sliderForEffect.querySelector('.effect-level__pin').tabindex;
+
+var sliderEffectMove = function () {
+  var value;
+  sliderEffectTabindex = value;
+};
+
+sliderForEffect.addEventListener('mouseup', sliderEffectMove);
