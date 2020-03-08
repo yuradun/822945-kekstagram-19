@@ -66,29 +66,52 @@ var photoSettingsWindowClose = photoSettingsWindow.querySelector('.img-upload__c
 
 buttonUploadImage.addEventListener('change', function () {
   photoSettingsWindow.classList.remove('hidden');
+  photoSettingsWindowClose.addEventListener('click', function () {
+    photoSettingsWindow.classList.add('hidden');
+    photoSettingsWindow.remove(photoSettingsWindowClose);
+  });
+  document.addEventListener('keydown', function (evt) {
+    if (evt.key === 'Escape') {
+      photoSettingsWindow.classList.add('hidden');
+      photoSettingsWindow.remove(photoSettingsWindowClose);
+    }
+  });
 });
 
-photoSettingsWindowClose.addEventListener('click', function () {
-  photoSettingsWindow.classList.add('hidden');
-});
+// чертов ползунок
+// нет идей что с ним делать дальше
 
-// Таким вариантом не закрывает окно почему-то
-/*
-var uploadChangeHandler = function () {
-  photoSettingsWindow.classList.remove('hidden');
-};
+var sliderEffectPin = photoSettingsWindow.querySelector('.effect-level__pin');
+var sliderEffectValue = photoSettingsWindow.querySelector('.effect-level__value');
+var blockWidth = 100;
+var pinWidth = sliderEffectValue.value;
 
-buttonUploadImage.addEventListener('change', uploadChangeHandler);
-
-photoSettingsWindowClose.removeEventListener('click', uploadChangeHandler);
-*/
-
-var sliderForEffect = photoSettingsWindow.querySelector('.effect-level__pin');
-var sliderEffectTabindex = sliderForEffect.querySelector('.effect-level__pin').tabindex;
+sliderEffectPin.addEventListener('mouseup', sliderEffectMove);
 
 var sliderEffectMove = function () {
-  var value;
-  sliderEffectTabindex = value;
+  var newWidth = blockWidth / pinWidth
+
 };
 
-sliderForEffect.addEventListener('mouseup', sliderEffectMove);
+// валидация хеш-тегов
+
+var hashtags = document.querySelector('.text__hashtags');
+var hashtagsMassive = [];
+
+hashtags.maxlength = 20;
+
+var hashTagsValidity = function () {
+  hashtagsMassive = hashtags.split('#');
+  for (var i = 0; hashtagsMassive.length < i; i++) {
+    var checkOne = [];
+    checkOne = hashtagsMassive[i].split('');
+    if (checkOne[0] !== '#') {
+      alert('Ошибка');
+    }
+    if (checkOne.length === 1) {
+      alert('Ошибка');
+    }
+    if (hashtagsMassive === 6) {
+      alert('Ошибка');
+    }
+};
