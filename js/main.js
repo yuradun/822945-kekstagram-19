@@ -64,54 +64,53 @@ var buttonUploadImage = document.querySelector('#upload-file');
 var photoSettingsWindow = document.querySelector('.img-upload__overlay');
 var photoSettingsWindowClose = photoSettingsWindow.querySelector('.img-upload__cancel');
 
+var onPhotoSettingsWindowCloseClick = function () {
+  photoSettingsWindow.classList.add('hidden');
+  photoSettingsWindow.remove(onPhotoSettingsWindowCloseClick);
+};
+
 buttonUploadImage.addEventListener('change', function () {
   photoSettingsWindow.classList.remove('hidden');
-  photoSettingsWindowClose.addEventListener('click', function () {
-    photoSettingsWindow.classList.add('hidden');
-    photoSettingsWindow.remove(photoSettingsWindowClose);
-  });
+  photoSettingsWindowClose.addEventListener('click', onPhotoSettingsWindowCloseClick);
+
   document.addEventListener('keydown', function (evt) {
     if (evt.key === 'Escape') {
       photoSettingsWindow.classList.add('hidden');
-      photoSettingsWindow.remove(photoSettingsWindowClose);
+      photoSettingsWindow.removeEventListener(photoSettingsWindowClose);
     }
   });
 });
 
-// чертов ползунок
-// нет идей что с ним делать дальше
+
+// ползунок
 
 var sliderEffectPin = photoSettingsWindow.querySelector('.effect-level__pin');
 var sliderEffectValue = photoSettingsWindow.querySelector('.effect-level__value');
-var blockWidth = 100;
-var pinWidth = sliderEffectValue.value;
+var sliderEffectPinWidth = 453;
 
-sliderEffectPin.addEventListener('mouseup', sliderEffectMove);
-
-var sliderEffectMove = function () {
-  var newWidth = blockWidth / pinWidth
+var sliderEffectPinMove = function (evt) {
+  var pinPlace = evt.offsetX;
+  var effectValue = sliderEffectPinWidth / pinPlace;
+  sliderEffectValue.value = effectValue;
 
 };
 
+sliderEffectPin.addEventListener('mouseup', sliderEffectPinMove());
+
 // валидация хеш-тегов
 
-var hashtags = document.querySelector('.text__hashtags');
+var buttonSubmit = document.querySelector('.img-upload__submit');
+var hashtagsInput = document.querySelector('.text__hashtags');
 var hashtagsMassive = [];
 
-hashtags.maxlength = 20;
+buttonSubmit.addEventListener('click', hashtagsValidity);
 
-var hashTagsValidity = function () {
-  hashtagsMassive = hashtags.split('#');
-  for (var i = 0; hashtagsMassive.length < i; i++) {
-    var checkOne = [];
-    checkOne = hashtagsMassive[i].split('');
-    if (checkOne[0] !== '#') {
-      alert('Ошибка');
+var hashtagsValidity = function () {
+  hashtagsMassive = hashtagsInput.split(' ');
+  for (var i = 0; hashtagsMassive.length > i; i++) {
+    if (hashtagsMassive[i[0]] !== '#' || hashtagsMassive[i].length === 1 || hashtagsMassive[i].length > 20 ||
+    hashtagsMassive > 5) {
+      hashtagsInput.setCustomValidity('Ошибка');
     }
-    if (checkOne.length === 1) {
-      alert('Ошибка');
-    }
-    if (hashtagsMassive === 6) {
-      alert('Ошибка');
-    }
+  }
 };
